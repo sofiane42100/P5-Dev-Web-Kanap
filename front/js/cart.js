@@ -36,7 +36,7 @@ for (k = 0; k < produitPanier.length; k++){//incrementation a chaque boucle
     <div class="cart__item__content__settings">
     <div class="cart__item__content__settings__quantity">
     <p>Qté : </p>
-    <input type="number" class="itemQuantity" data-id= "${produitPanier[k].name} data-couleur= '${produitPanier[k].option_produit}"  name="itemQuantity" min="1" max="100" value="${produitPanier[k].quantite}">
+    <input type="number" onchange="changeQuantite('${produitPanier[k].name}', '${produitPanier[k].option_produit}', this.value)" class="itemQuantity" data-id= "${produitPanier[k].name} data-couleur= '${produitPanier[k].option_produit}"  name="itemQuantity" min="1" max="100" value="${produitPanier[k].quantite}">
     </div>
      <div      class="cart__item__content__settings__delete">
      <p class="deleteItem">Supprimer</p>
@@ -45,6 +45,10 @@ for (k = 0; k < produitPanier.length; k++){//incrementation a chaque boucle
      </div>
     </article>
     `;  
+
+   
+
+
 } 
 
 
@@ -86,23 +90,36 @@ for (let l = 0; l < btn_supprimer.length; l++){
 
 })
 }
-//------------------modifier la quantite du client dans le panier--------
 
-let selectionQuantite = document.querySelector(".itemQuantity")
-   selectionQuantite.addEventListener("click", (event)=>{
-     event.preventDefault();
+ //------------------modifier la quantite du client dans le panier--------
+
+ 
+ function changeQuantite(nom,couleur,quantite){
+
+ 
+
+  let produitPanier = JSON.parse(localStorage.getItem("produit"));
+
      
-     for(let n = 0; n < produitPanier.length; n++){
-       let selectionProduit = produitPanier[n].quantite
-
-       selectionQuantites =+ selectionProduit
-     }
-
-     alert("ÊTES-VOUS SUR?")
-
-    
-  })
-
+     //boucle for pour verifier si le produit est deja dans le panier et a ou pas la meme couleur
+    if(quantite > 0 && quantite <= 100 ){  
+       
+      produitPanier.forEach((prod) =>{
+         
+         if (nom == prod.name){ //prod=produit qui est présent dans le panier
+           
+             if (couleur == prod.option_produit){
+             
+                 prod.quantite = parseInt(quantite)  
+             }
+            
+         }
+     })
+    }
+    totalPanier(produitPanier)
+    localStorage.setItem("produit" , JSON.stringify(produitPanier));
+ 
+ }
 
 //------------------total du panier---------
 

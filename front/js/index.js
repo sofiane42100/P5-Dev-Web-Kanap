@@ -1,4 +1,4 @@
-fetch('http://localhost:3000/api/products')//
+fetch('http://localhost:3000/api/products')
 .then(res => res.json()) //  promise  pour traiter la reponse avec la methode js          
 .then(data => {
     console.log(data)

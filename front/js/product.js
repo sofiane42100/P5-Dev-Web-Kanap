@@ -22,14 +22,10 @@ const fetchProduct = async() =>
        
      document.getElementById("image").innerHTML =`
       <img src="${productData.imageUrl}" alt="${productData.altTxt}">`
-     document.getElementById("title").innerHTML = `<h1 id="title">${productData.name}</h1>`
-     document.getElementById("price").innerHTML = `<span id="price">${productData.price}</span>€</p>`
-     document.getElementById("description").innerHTML = `<p id="description">${productData.description}</p>` 
-     document.getElementById("colors").innerHTML = `  <option value="">--SVP, choisissez une couleur --</option>
-     <!--                       <option value="vert">vert</option>
-                           <option value="blanc">blanc</option> -->
-                       </select>`
-     
+     document.getElementById("title").textContent = productData.name
+     document.getElementById("price").textContent = productData.price
+     document.getElementById("description").textContent = productData.description 
+   
       
       //creer une variable, pour aller chercher id colors
      let select = document.getElementById("colors");
@@ -61,8 +57,6 @@ const fetchProduct = async() =>
 //Sélection de l'id du formulaire
  const choixProduit = document.querySelector("#colors")
 
-
- 
  //Mettre le choix de l'utilisateur dans une variable
  const boutonId = document.querySelector ("#addToCart");
  
